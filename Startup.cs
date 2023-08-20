@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using webappmssql.Data; //ทำให้เข้าถึง MyWorldDBContext.cs ได้
+using Microsoft.EntityFrameworkCore;
 
 namespace webappmssql
 {
@@ -31,6 +33,12 @@ namespace webappmssql
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "webappmssql", Version = "v1" });
+            });
+
+            //เรียกใช้ MyWorldDBContext.cs
+            services.AddDbContext<MyWorldDBContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("MyWorldDbConnection"));
             });
         }
 

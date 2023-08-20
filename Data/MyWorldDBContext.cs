@@ -8,8 +8,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace webappmssql.Data
 {
-    public class MyWorldDBContext: DbContext
+    public class MyWorldDBContext: DbContext //เอา class DbContext จาก EntityFrameworkCore มาใช้
     {
-        
+        public MyWorldDBContext(DbContextOptions<MyWorldDBContext> options) : base (options){
+
+        }
+
+        public DbSet<Gadgets> Gadgets {get; set;} // DbSet คือ method มาจาก class ใน EntityFrameworkCore
     }
 }
